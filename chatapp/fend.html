@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CHATWORLD</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+    	var socket = io();
+    	socket.on('gotmsg',function(user,messg){
+    		$("#mbox").append("<li style='color: white'><strong>"+user+"</strong> :  "+ messg +" </li>");
+    		var objDiv = document.getElementById("mbox");
+			objDiv.scrollTop = objDiv.scrollHeight;
+    	});
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script>
+		$(document).ready(function(){
+			$("#submes").click(function(){
+				console.log("HELLO");
+				socket.emit('sent',$("#ipbox").val(),$("#inpmes").val());
+			});
+		});
+	</script>
+    <style>
+	body{
+		background-color: black;
+	}
+	#ipbox{
+   		margin-left: 330px;
+	}
+	#mbox{
+		height: 270px;
+		overflow: auto;
+		list-style-type: none;
+	}
+	#inpmes{
+		width: 700px;
+	}
+	.btn-primary{
+		border: 0px;
+		outline: none;
+		height: 30px;
+		margin-top: -3px;
+		background-color: black;
+		padding-bottom: 5px;
+	}
+	.btn-primary:hover,.btn-primary:focus{
+		background-color: white;
+		color: black;
+	}
+	</style>
+</head>
+<body>
+<div class='container-fluid '>
+	<h1 class="text-center" style="color: white">CHAT WORLD</h1>
+	<p style="color: white" class="text-center"> USERNAME: </p>
+	<input type="text" id="ipbox">
+	<ul id="mbox">
+	
+	</ul>
+	<div class="row">
+		<div class="col-xs-10">
+			<input type="text" id="inpmes">
+		</div>
+		<div class="col-xs-2">
+			<button type="submit" class="btn btn-primary" id="submes">SUBMIT</button>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
