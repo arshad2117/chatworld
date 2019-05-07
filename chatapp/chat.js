@@ -15,7 +15,7 @@ io.on('connection',function(socket){
 	});
 });
 
-http.listen(4000, function(){
+http.listen(5000, function(){
 	console.log("SERVER IS RUNNING");	
 });
     
